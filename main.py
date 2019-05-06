@@ -6,16 +6,16 @@ from metric_and_output import *
 from train_and_summary import *
 
 # parameters
-MODE_NAMES = ['LOSO'] # ['LOSO', 'Holdout']
-TASK_NAMES = ['SU'] # ['SU', 'KT', 'NP']
+MODE_NAMES = ['LOSO', 'Holdout']
+TASK_NAMES = ['SU', 'KT', 'NP']
 
 N_CLASSES = 3
 N_CHANNELS = 38
-N_FOLDS = 2  # for LOSO mode only: 5 fold
+N_FOLDS = 5  # for LOSO mode only: 5 fold
 SEQ_LEN = 60  # sequence length: 30, 60, 90
 BATCH_SIZE = 600
 LEARNING_RATE = 0.0001
-EPOCH = 100
+EPOCH = 300
 
 if N_CLASSES == 2:
     LABEL_COL_NAMES = ['Novice', 'Expert']
@@ -27,7 +27,7 @@ cwd = os.getcwd() # get current workspace directory
 for task_str in TASK_NAMES:
     for mode_str in MODE_NAMES:
 
-        log_path = cwd+ '/BIKESH_RESULTS_'+ mode_str + '/' + task_str + '_W{}'.format (SEQ_LEN) # set log path
+        log_path = cwd+ '/BIKESH_RESULTS_3_'+ mode_str + '/' + task_str + '_W{}'.format (SEQ_LEN) # set log path
 
         if mode_str == 'LOSO':
             KFoldElapseT = []
