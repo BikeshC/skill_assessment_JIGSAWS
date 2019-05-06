@@ -11,8 +11,8 @@ TASK_NAMES = ['SU'] # ['SU', 'KT', 'NP']
 
 N_CLASSES = 3
 N_CHANNELS = 38
-N_FOLDS = 5  # for LOSO mode only: 5 fold
-SEQ_LEN = 90  # sequence length: 30, 60, 90
+N_FOLDS = 2  # for LOSO mode only: 5 fold
+SEQ_LEN = 60  # sequence length: 30, 60, 90
 BATCH_SIZE = 600
 LEARNING_RATE = 0.0001
 EPOCH = 100

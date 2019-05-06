@@ -111,7 +111,8 @@ def plot_classif_metrics(log_path,
     classes = []
     plotMat = []
 
-    for line in lines[2 : (len(lines) - 3)]:
+    #for line in lines[2: (len(lines) - 3)]:
+    for line in lines[2 : 5]:
         #print(line)
         t = line.split()
         # print(t)

@@ -104,7 +104,14 @@ def model_train_and_test(url, log_path, SEQ_LEN, N_CLASSES, N_CHANNELS, LEARNING
     X_tr, X_val, X_test, y_tr, y_val, y_test = timeseriesdata.train_val_test_split(url= url)
 
     # create model
-    model = model_cnn(input_size= (SEQ_LEN, N_CHANNELS), output_size= N_CLASSES, learning_rate= LEARNING_RATE)
+    #model = model_cnn(input_size= (SEQ_LEN, N_CHANNELS), output_size= N_CLASSES, learning_rate= LEARNING_RATE)
+
+    #save model
+    #model.save('my_model.h5')  # creates a HDF5 file 'my_model.h5'
+
+    # returns a compiled model
+    # identical to the previous one
+    model = models.load_model('my_model.h5')
 
     # fit model
     history = model.fit(X_tr, y_tr, epochs= EPOCH, batch_size= BATCH_SIZE, validation_data=(X_val, y_val))
