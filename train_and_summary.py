@@ -11,6 +11,7 @@ from metric_and_output import plot_accuracy, plot_loss, plot_confusion_matrix
 
 global LOSO_MODE
 
+'''
 def model_cnn(input_size, output_size, learning_rate):
     model = models.Sequential ()
 
@@ -38,6 +39,53 @@ def model_cnn(input_size, output_size, learning_rate):
     model.add (layers.Dropout (rate=0.5))
 
     model.add (layers.Dense (units=output_size, activation='softmax'))
+
+    adam = optimizers.Adam (lr= learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+
+    model.compile (optimizer= adam,
+                   loss='categorical_crossentropy',
+                   metrics=['accuracy'])
+
+    return model'''
+
+
+def model_cnn(input_size, output_size, learning_rate):
+    inputx = layers.Input(shape=input_size) 
+    
+    conv1 = layers.Conv1D (filters=38, kernel_size=2, strides=1,
+                              padding='same', kernel_initializer='glorot_normal', 
+                              activation='relu')
+    conv2 = layers.Conv1D (filters=76, kernel_size=2, strides=1,
+                              padding='same', activation='relu')
+    
+    conv3 = layers.Conv1D (filters=152, kernel_size=2, strides=1,
+                              padding='same', activation='relu')
+    max_pool = layers.MaxPool1D (pool_size=2, strides=2, padding='same')
+    dropout2 = layers.Dropout (rate=0.2)
+    dropout5 = layers.Dropout (rate=0.5)
+
+    x = conv1(inputx)
+    x = max_pool(x)
+    x = dropout2(x)
+    
+    x = conv2(x)
+    x = max_pool(x)
+    x = dropout2(x)
+    
+    x = conv3(x)
+    x = max_pool(x)
+    x = dropout2(x)
+
+    x = layers.Flatten()(x)
+    x = layers.Dense (units=64, activation='relu')(x)
+    x = dropout5(x)
+    
+    x = layers.Dense (units=32, activation='relu')(x)
+    x = dropout5(x)
+    
+    y = layers.Dense (units=output_size, activation='softmax')(x)
+    
+    model = models.Model(inputx, y)
 
     adam = optimizers.Adam (lr= learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
 
@@ -77,7 +125,11 @@ def model_train_and_test(url, log_path, SEQ_LEN, N_CLASSES, N_CHANNELS, LEARNING
 
     # get running time on test set
     startT = time.perf_counter()
-    y_pred = model.predict_classes(X_test)
+    #BC
+    y_pred_probs = model.predict(X_test)
+    y_pred = np.argmax (y_pred_probs, axis=1)
+    #BC
+    #y_pred = model.predict_classes(X_test)
     elapseT = (time.perf_counter() - startT)
 
     print ('\nTRAINING FINISHED!\n')
