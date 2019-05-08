@@ -190,7 +190,7 @@ def model_train_and_test(url, log_path, SEQ_LEN, N_CLASSES, N_CHANNELS, LEARNING
 def train_model_holdout(log_path, task_str, SEQ_LEN, N_CLASSES, N_CHANNELS, LEARNING_RATE,
                                                                 EPOCH, BATCH_SIZE):
     print ('Holdout MODE\n')
-    url = './DATA_Holdout/' + task_str + '/'
+    url = '/content/drive/My Drive/Colab Experimental/Workspace/DATA_Holdout/' + task_str + '/'
 
     model, history, y_pred, y_test, elapseT, test_acc = model_train_and_test (url, log_path, SEQ_LEN,
                                                                               N_CLASSES, N_CHANNELS, LEARNING_RATE, EPOCH, BATCH_SIZE,
@@ -216,7 +216,7 @@ def train_model_loso(log_path, task_str, N_FOLDS, SEQ_LEN, N_CLASSES, N_CHANNELS
         fold_str = 'fold_{}'.format (fold)
         LOSO_MODE = True
         print ('LOSO mode: ' + fold_str + '\n')
-        url = './DATA_LOSO/' + task_str + '/' + fold_str + '/'
+        url = '/content/drive/My Drive/Colab Experimental/Workspace/DATA_LOSO/' + task_str + '/' + fold_str + '/'
 
         model, history, y_pred, y_test, elapseT, test_acc = model_train_and_test (url, log_path, SEQ_LEN, N_CLASSES, N_CHANNELS, LEARNING_RATE, EPOCH, BATCH_SIZE, LOSO_MODE, fold)
         if prediction_seqs is None:

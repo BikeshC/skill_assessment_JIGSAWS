@@ -35,7 +35,7 @@ class TimeSeriesData(object):
         old_str = []
 
         count = 0
-        for file in glob.glob ('./DATA_LOSO/' + 'meta_file_' + '*' + '.txt'):
+        for file in glob.glob ('/content/drive/My Drive/Colab Experimental/Workspace/DATA_LOSO/' + 'meta_file_' + '*' + '.txt'):
             for line in open (file, 'r'):
                 line = line.strip ()
                 if len (line) == 0:
@@ -64,7 +64,7 @@ class TimeSeriesData(object):
         for line in tempData.keys ():
             avgGRS[line] = [float ("{0:.2f}".format (a / (tempData[line][2]))) for a in tempData[line][1]]
 
-        for file in glob.glob ('./DATA_LOSO/' + 'meta_file_' + '*' + '.txt'):
+        for file in glob.glob ('/content/drive/My Drive/Colab Experimental/Workspace/DATA_LOSO/' + 'meta_file_' + '*' + '.txt'):
             for line in open (file, 'r'):
                 line = line.strip ()
                 if len (line) == 0:
